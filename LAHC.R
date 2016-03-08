@@ -41,6 +41,7 @@ check_assignments <- function(sol,instance) {
 }
 
 # Check whether a given assignment is valid
+# padding is added to the edges during the calculation of minima requirements
 check_assignment <- function(assignment,instance) {
     pad_on <- rep(TRUE,instance$on_min)
     pad_off <- rep(FALSE,instance$off_min)
