@@ -1,0 +1,4 @@
+.LOG
+14:12 08/03/2016 4u
+Beide gelezen over VNS en LAHC. Gekozen voor LAHC.
+Gebrainstormd over problem-generatie. Git directory opgezet.
