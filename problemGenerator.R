@@ -37,3 +37,32 @@ delhaize_royal_spectrum <- function(t=NA,b_min=NA,b_max=NA) {
        off_max=sample(4:8,1),
        b = sample(b_min:b_max,t,replace=TRUE))
 }
+
+random_binary_matrix <- function(rows=NA,cols=NA) {
+  if(is.na(rows)) rows = sample(10:20,1)
+  if(is.na(cols)) cols = sample(10:20,1)
+  
+  m = matrix(sample(0:1,rows*cols,replace=TRUE),rows,cols)
+  
+  b = apply(m,2,sum)
+  t = length(b)
+  
+  on_min = min(apply(m,1,function(x) find_oomm(x,1,min)))
+  on_max = max(apply(m,1,function(x) find_oomm(x,1,max)))
+  off_min = min(apply(m,1,function(x) find_oomm(x,0,min)))
+  off_max = max(apply(m,1,function(x) find_oomm(x,0,max)))
+  
+  list(t=t,
+       on_min=on_min,
+       on_max=on_max,
+       off_min=off_min,
+       off_max=off_max,
+       b=b)
+  
+}
+
+find_oomm <- function(x,find=0,filter) {
+  if(find != 0) x = 1-x
+  filter(table(cumsum(x)[x==0]))
+}
+  
