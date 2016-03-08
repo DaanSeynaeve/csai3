@@ -42,15 +42,15 @@ random_binary_matrix <- function(rows=NA,cols=NA) {
   if(is.na(rows)) rows = sample(10:20,1)
   if(is.na(cols)) cols = sample(10:20,1)
   
-  m = matrix(sample(0:1,rows*cols,replace=TRUE),rows,cols)
+  m = matrix(sample(c(FALSE,TRUE),rows*cols,replace=TRUE),rows,cols)
   
   b = apply(m,2,sum)
   t = length(b)
   
-  on_min = min(apply(m,1,function(x) find_oomm(x,1,min)))
-  on_max = max(apply(m,1,function(x) find_oomm(x,1,max)))
-  off_min = min(apply(m,1,function(x) find_oomm(x,0,min)))
-  off_max = max(apply(m,1,function(x) find_oomm(x,0,max)))
+  on_min = min(apply(m,1,function(x) find_oomm(x,TRUE,min)))
+  on_max = max(apply(m,1,function(x) find_oomm(x,TRUE,max)))
+  off_min = min(apply(m,1,function(x) find_oomm(x,FALSE,min)))
+  off_max = max(apply(m,1,function(x) find_oomm(x,FALSE,max)))
   
   list(t=t,
        on_min=on_min,
@@ -61,8 +61,26 @@ random_binary_matrix <- function(rows=NA,cols=NA) {
   
 }
 
-find_oomm <- function(x,find=0,filter) {
-  if(find != 0) x = 1-x
-  filter(table(cumsum(x)[x==0]))
+find_oomm <- function(x,bool,filter) {
+  if(!bool) x = !x
+  filter(table(cumsum(x)[!x]))
+}
+
+convert_to_cyclic_problem <- function(gdodosp) {
+  assignment = c()
+  on = sample(c(TRUE,FALSE),1)
+  while(length(assignment) < gdodosp$t) {
+    if(on){
+      lower = gdodosp$on_min
+      upper = gdodosp$on_max
+    } else {
+      lower = gdodosp$off_min
+      upper = gdodosp$off_max
+    }
+    assignment = c(assignment, rep(on,sample(lower,upper),1))
+    on = !on
+  }
+  list(b = gdodosp$b,
+       assignment = assignment[1:gdodosp$t])
 }
   
