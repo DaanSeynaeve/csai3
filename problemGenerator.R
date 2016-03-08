@@ -5,3 +5,5 @@ delhaize <- function() {
 royal <- function() {
   print("morestuff")
 }
+
+print("help")
