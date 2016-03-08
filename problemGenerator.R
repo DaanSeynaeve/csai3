@@ -1,3 +1,5 @@
+# Return a GDODOSP based on the proxy delhaize where Daan used to work.
+# The time unit is half days and the period is a full week.
 delhaize <- function() {
   list(t=14,
        on_min=2,
@@ -13,6 +15,8 @@ delhaize <- function() {
            4,3))
 }
 
+# Return a GDODOSP based on the restaurant 'Royal' where Tom used to work.
+# The time unit is hours and the period is a full working day.
 royal <- function() {
   list(t=16,
        on_min=3,
@@ -25,6 +29,7 @@ royal <- function() {
            20,20,15,10))
 }
 
+# Return a random GDODOSP that should resemble a real world scheduling problem
 delhaize_royal_spectrum <- function(t=NA,b_min=NA,b_max=NA) {
   if(is.na(t)) t = sample(10:20,1)
   if(is.na(b_min)) b_min = sample(1:20,1)
@@ -38,6 +43,7 @@ delhaize_royal_spectrum <- function(t=NA,b_min=NA,b_max=NA) {
        b = sample(b_min:b_max,t,replace=TRUE))
 }
 
+# Return a random GDODOSP that was solved by a randomly generated binary matrix.
 random_binary_matrix <- function(rows=NA,cols=NA) {
   if(is.na(rows)) rows = sample(10:20,1)
   if(is.na(cols)) cols = sample(10:20,1)
@@ -61,11 +67,15 @@ random_binary_matrix <- function(rows=NA,cols=NA) {
   
 }
 
+# Get the lengths of maximal subsequences from x of the given bool
+# and apply the given filter such as min or max
 find_oomm <- function(x,bool,filter) {
   if(!bool) x = !x
   filter(table(cumsum(x)[!x]))
 }
 
+# Take a gdodosp and convert it to a a cdodosp
+# with a randomly generated basic assignment
 convert_to_cyclic_problem <- function(gdodosp) {
   assignment = c()
   on = sample(c(TRUE,FALSE),1)
@@ -77,7 +87,7 @@ convert_to_cyclic_problem <- function(gdodosp) {
       lower = gdodosp$off_min
       upper = gdodosp$off_max
     }
-    assignment = c(assignment, rep(on,sample(lower,upper),1))
+    assignment = c(assignment, rep(on,sample(lower:upper,1)))
     on = !on
   }
   list(b = gdodosp$b,
