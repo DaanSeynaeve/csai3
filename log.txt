@@ -2,3 +2,9 @@
 14:12 08/03/2016 4u
 Beide gelezen over VNS en LAHC. Gekozen voor LAHC.
 Gebrainstormd over problem-generatie. Git directory opgezet.
+17:35 08/03/2016 3u30
+Tom: Probleemgenerators geschreven
+Daan:
+genereren van nieuwe assignments
+checken of een assignment geldig is (blijkt moeilijker te coderen dan verwacht).
+checken of een oplossing geldig is (is b voldaan?)

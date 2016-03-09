@@ -15,10 +15,10 @@ o- =< d+
 real world example delhaize:
 rekenen met halve dagen
 t = 14
-d- = 2
-d+ = 6
-o- = 2
-o+ = 4
+on_min = 2
+on_max = 6
+off_min = 2
+off_max = 4
 b = 2-3 tijdens de week, 3-4 tijdens het weekend
 
 
