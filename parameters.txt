@@ -1,0 +1,4 @@
+### PARAMETER FILE FOR THE ACOTSP SOFTWARE
+
+# name		switch		     type	values			[conditions (using R syntax)]
+lfa   "--lfa "      i   (1,20)

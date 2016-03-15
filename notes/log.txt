@@ -11,3 +11,6 @@ checken of een oplossing geldig is (is b voldaan?)
 15:01 15/03/2016 4u
 Tom: Klooien met Irace, eindelijk werkende gekregen. (Op windows!)
 Daan: Programmeren van LAHC en neighbourhoods
+16:55 15/03/2016 2u
+Tom: Irace gekoppeld aan LAHC. Door runnen van random voorbeelden fout gevonden in Daan zijn code. Hihi.
+Daan: verder geprogrammeerd aan neighbourhoods en LAHC
