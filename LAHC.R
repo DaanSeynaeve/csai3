@@ -4,10 +4,10 @@
 #' @param max_iterations; number of iterations to perform
 lahc <- function(instance, Lfa, max_iterations) {
     fn_mut = function(x) { replace_assignment(x,instance) }
-    c = cost2 # fitness
+    fn_c = cost2
     
     s <- init_solution(instance)
-    f <- rep(c(s),Lfa)
+    f <- rep(fn_c(s),Lfa)
     i <- 0
     print('init')
     print(f)
@@ -18,10 +18,10 @@ lahc <- function(instance, Lfa, max_iterations) {
         }
         s_new <- fn_mut(s)
         v <- (i %% Lfa) + 1
-        if (c(s_new) <= f[v] || c(s_new) <= c(s)) {
+        if (fn_c(s_new) <= f[v] || fn_c(s_new) <= fn_c(s)) {
             s <- s_new
         }
-        f[v] <- c(s)
+        f[v] <- fn_c(s)
         i <- i + 1
     }
     print('finished')
@@ -33,11 +33,7 @@ lahc <- function(instance, Lfa, max_iterations) {
 #' until every timeslot is sufficiently filled.
 init_solution <- function(instance) {
     sol <- rbind(new_assignment(instance))
-    while (!check_solution(sol, instance)) {
-        assignment <- new_assignment(instance)
-        sol <- rbind(sol,assignment)
-    }
-    return(sol)
+    return(repair(sol,instance))
 }
 
 #' --------------------------------
@@ -46,13 +42,13 @@ init_solution <- function(instance) {
 
 #' GDODOSP Cost function
 #' @return the number of assignments
-cost = function(sol, type) {
+cost <- function(sol, type) {
     return(sum(sol))
 }
 
 #' GDODOSP Cost function
 #' @the number of employees
-cost2 = function(sol, type) {
+cost2 <- function(sol, type) {
     return(dim(sol)[1])
 }
 
@@ -61,11 +57,33 @@ cost2 = function(sol, type) {
 #' --------------------------------
 
 #' GDODOSP Neighbourhood function
-#' deletes a random employee assignment and generate new assignments
-#' until a feasible solution is reached
-replace_assignment = function(sol, instance) {
-    r = sample(1:dim(sol)[1],1)
-    sol2 = sol[-r,]
+#' deletes a random employee assignment and
+#' generates new assignments until a feasible solution is reached
+replace_assignment <- function(sol, instance) {
+    r <- sample(1:dim(sol)[1],1)
+    sol2 <- sol[-r,]
+    return(repair(sol2, instance))
+}
+
+#' GDODOSP Neighbourhood function
+#' combines two employees assignments into a new one and
+#' generates new assignments until a feasible solution is reached
+combine_assignments <- function(sol, instance, fn_combine) {
+    a <- sample(1,dim(sol)[1],2)
+    b <- fn_combine(sol[a])
+    
+    sol2 = rbind(sol[c(-a[1],-a[2]),],b)
+    
+    return(repair(sol2, instance))
+}
+
+#' --------------------------------
+#' Helper functions
+#' --------------------------------
+
+#' generates new assignments until a feasible solution is reached
+repair <- function(sol, instance) {
+    sol2 <- sol
     while (!check_solution(sol2, instance)) {
         assignment <- new_assignment(instance)
         sol2 <- rbind(sol2,assignment)
@@ -73,13 +91,9 @@ replace_assignment = function(sol, instance) {
     return(sol2)
 }
 
-#' --------------------------------
-#' Helper functions
-#' --------------------------------
-
 #' Generates a random assignment for the GDODOSP
 new_assignment <- function(instance) {
-    assignment = rep(FALSE,instance$t)
+    assignment <- rep(FALSE,instance$t)
     working <- sample(c(TRUE,FALSE),1)
     day <- 1
     while (day <= instance$t) {
