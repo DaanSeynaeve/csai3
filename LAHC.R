@@ -5,7 +5,7 @@
 #' @param verbose; set to FALSE to surpress output
 lahc <- function(instance, Lfa, max_iterations, verbose) {
     fn_mut = function(x) {find_neighbour(x,instance)}
-    fn_c = cost2
+    fn_c = cost
     
     s <- init_solution(instance)
     f <- rep(fn_c(s),Lfa)
@@ -62,15 +62,19 @@ cost2 <- function(sol, type) {
 #' --------------------------------
 
 find_neighbour <- function(sol, instance) {
-    and <- function(x){apply(x,2,all)}
-    or <- function(x){apply(x,2,any)}
+    and_ <- function(x){apply(x,2,all)}
+    or_ <- function(x){apply(x,2,any)}
+    xor_ <- function(x){apply(x,2,function(y) {any(y) && !all(y)})}
     neighbourhood = sample(1:2,1)
-    if (neighbourhood==1) {
+    if (TRUE) {
         # print('replacement')
         return(replace_assignment(sol,instance))
+        
     } else {
         # print('combination')
-        return(combine_assignments(sol,instance,and))
+        # return(vertical_swap(sol,instance))
+        # return(combine_assignments(sol,instance,and_))
+        return(bitflip(sol,instance))
     }
 } 
 
@@ -98,6 +102,51 @@ combine_assignments <- function(sol, instance, fn_combine) {
         # print('fail')
         return(sol)
     }
+}
+
+#' GDODOSP Neighbourhood function
+#' swap the assignment of a timeslot between two employees
+vertical_swap <- function(sol, instance) {
+    e <- sample(1:dim(sol)[1],2)
+    d <- sample(1:dim(sol)[2],1)
+    
+    sol2 <- sol
+    sol2[e[2],d] <- sol[e[1],d]
+    sol2[e[1],d] <- sol[e[2],d]
+    
+    if(check_assignment(sol2[e[1],],instance) && check_assignment(sol2[e[2],], instance)) {
+        if (check_solution(sol2[-e[1],],instance)) {
+            return(sol2[-e[1],])
+        } else if (check_solution(sol2[-e[2],],instance)) {
+            return(sol2[-e[2],])
+        } else {
+            return(sol2)
+        }
+    } else {
+        return(sol)
+    }
+}
+
+#' GDODSP Neighbourhood function
+#' randomly changes the assignment of an employee in a timeslot
+bitflip <- function(sol, instance) {
+    e <- sample(1:dim(sol)[1],1)
+    d <- sample(1:dim(sol)[2],1)
+    
+    sol2 <- sol
+    sol2[e,d] <- !sol[e,d]
+    
+    if (check_assignment(sol2[e,],instance) && check_solution(sol2,instance)) {
+        return(sol2)
+    } else {
+        return(sol)
+    }
+}
+
+#' GDODSP Neighbourhood functon
+#' shifts an existing employee assignment
+shift_assignment <- function(sol, instance) {
+    print('TODO')
 }
 
 #' --------------------------------
