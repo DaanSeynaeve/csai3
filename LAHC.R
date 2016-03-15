@@ -2,18 +2,21 @@
 #' @param instance; the problem instance
 #' @param Lfa; length of the fitness array
 #' @param max_iterations; number of iterations to perform
-lahc <- function(instance, Lfa, max_iterations) {
-    fn_mut = function(x) { replace_assignment(x,instance) }
+#' @param verbose; set to FALSE to surpress output
+lahc <- function(instance, Lfa, max_iterations, verbose) {
+    fn_mut = function(x) {find_neighbour(x,instance)}
     fn_c = cost2
     
     s <- init_solution(instance)
     f <- rep(fn_c(s),Lfa)
     i <- 0
-    print('init')
-    print(f)
-    print('start iteration')
+    if (verbose) {
+        print('------ init ------')
+        print(fn_c(s))
+        print('------ start ------')
+    }
     while (i < max_iterations) {
-        if (i %% (max_iterations / 10) == 0) {
+        if (i %% (max_iterations / 10) == 0 && verbose) {
             print(i)
         }
         s_new <- fn_mut(s)
@@ -24,9 +27,11 @@ lahc <- function(instance, Lfa, max_iterations) {
         f[v] <- fn_c(s)
         i <- i + 1
     }
-    print('finished')
-    print(f)
-    return(s)
+    if (verbose) {
+        print('------ finished ------')
+        print(fn_c(s))
+    }
+    return(fn_c(s))
 }
 
 #' Generate an initial solution by generating new employee assignments
@@ -56,6 +61,19 @@ cost2 <- function(sol, type) {
 #' Neighbourhoods
 #' --------------------------------
 
+find_neighbour <- function(sol, instance) {
+    and <- function(x){apply(x,2,all)}
+    or <- function(x){apply(x,2,any)}
+    neighbourhood = sample(1:2,1)
+    if (neighbourhood==1) {
+        # print('replacement')
+        return(replace_assignment(sol,instance))
+    } else {
+        # print('combination')
+        return(combine_assignments(sol,instance,and))
+    }
+} 
+
 #' GDODOSP Neighbourhood function
 #' deletes a random employee assignment and
 #' generates new assignments until a feasible solution is reached
@@ -68,13 +86,18 @@ replace_assignment <- function(sol, instance) {
 #' GDODOSP Neighbourhood function
 #' combines two employees assignments into a new one and
 #' generates new assignments until a feasible solution is reached
+#' @param fn_combine; function that takes a matrix of 2 rows and combines them
 combine_assignments <- function(sol, instance, fn_combine) {
-    a <- sample(1,dim(sol)[1],2)
-    b <- fn_combine(sol[a])
-    
-    sol2 = rbind(sol[c(-a[1],-a[2]),],b)
-    
-    return(repair(sol2, instance))
+    a <- sol[sample(1:dim(sol)[1],2),]
+    b <- fn_combine(a)
+    if (check_assignment(b,instance)) {
+        # print('succes')
+        sol2 = rbind(sol[c(-a[1],-a[2]),],b)
+        return(repair(sol2, instance))
+    } else {
+        # print('fail')
+        return(sol)
+    }
 }
 
 #' --------------------------------
@@ -85,8 +108,8 @@ combine_assignments <- function(sol, instance, fn_combine) {
 repair <- function(sol, instance) {
     sol2 <- sol
     while (!check_solution(sol2, instance)) {
-        assignment <- new_assignment(instance)
-        sol2 <- rbind(sol2,assignment)
+        employee <- new_assignment(instance)
+        sol2 <- rbind(sol2,employee)
     }
     return(sol2)
 }
