@@ -93,4 +93,12 @@ convert_to_cyclic_problem <- function(gdodosp) {
   list(b = gdodosp$b,
        assignment = assignment[1:gdodosp$t])
 }
-  
+
+generate_and_save_examples <- function(n=100,examplesdir="instances") {
+  dir.create(examplesdir)
+  for (i in 1:n) {
+    example <- delhaize_royal_spectrum()
+    file <- paste(examplesdir,"/",as.character(i),".rds",sep="")
+    saveRDS(example,file=file)
+  }
+}
