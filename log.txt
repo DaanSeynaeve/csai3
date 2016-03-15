@@ -8,3 +8,6 @@ Daan:
 genereren van nieuwe assignments
 checken of een assignment geldig is (blijkt moeilijker te coderen dan verwacht).
 checken of een oplossing geldig is (is b voldaan?)
+15:01 15/03/2016 4u
+Tom: Klooien met Irace, eindelijk werkende gekregen. (Op windows!)
+Daan: Programmeren van LAHC en neighbourhoods
