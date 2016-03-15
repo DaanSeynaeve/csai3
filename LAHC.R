@@ -15,7 +15,6 @@ lahc <- function(instance, Lfa, max_iterations) {
     while (i < max_iterations) {
         if (i %% (max_iterations / 10) == 0) {
             print(i)
-            # print(c(s))
         }
         s_new <- fn_mut(s)
         v <- (i %% Lfa) + 1
@@ -40,6 +39,43 @@ init_solution <- function(instance) {
     }
     return(sol)
 }
+
+#' --------------------------------
+#' Cost functions
+#' --------------------------------
+
+#' GDODOSP Cost function
+#' @return the number of assignments
+cost = function(sol, type) {
+    return(sum(sol))
+}
+
+#' GDODOSP Cost function
+#' @the number of employees
+cost2 = function(sol, type) {
+    return(dim(sol)[1])
+}
+
+#' --------------------------------
+#' Neighbourhoods
+#' --------------------------------
+
+#' GDODOSP Neighbourhood function
+#' deletes a random employee assignment and generate new assignments
+#' until a feasible solution is reached
+replace_assignment = function(sol, instance) {
+    r = sample(1:dim(sol)[1],1)
+    sol2 = sol[-r,]
+    while (!check_solution(sol2, instance)) {
+        assignment <- new_assignment(instance)
+        sol2 <- rbind(sol2,assignment)
+    }
+    return(sol2)
+}
+
+#' --------------------------------
+#' Helper functions
+#' --------------------------------
 
 #' Generates a random assignment for the GDODOSP
 new_assignment <- function(instance) {
@@ -95,37 +131,4 @@ check_assignment <- function(assignment,instance) {
         c4 <- TRUE
     }
     return(all(c(c1,c2,c3,c4)))
-}
-
-#' --------------------------------
-#' Cost functions
-#' --------------------------------
-
-#' GDODOSP Cost function
-#' @return the number of assignments
-cost = function(sol, type) {
-    return(sum(sol))
-}
-
-#' GDODOSP Cost function
-#' @the number of employees
-cost2 = function(sol, type) {
-    return(dim(sol)[1])
-}
-
-#' --------------------------------
-#' Neighbourhoods
-#' --------------------------------
-
-#' GDODOSP Neighbourhood function
-#' deletes a random employee assignment and generate new assignments
-#' until a feasible solution is reached
-replace_assignment = function(sol, instance) {
-    r = sample(1:dim(sol)[1],1)
-    sol2 = sol[-r,]
-    while (!check_solution(sol2, instance)) {
-        assignment <- new_assignment(instance)
-        sol2 <- rbind(sol2,assignment)
-    }
-    return(sol2)
 }
