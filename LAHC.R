@@ -2,12 +2,16 @@
 # Generate an initial solution by generating new employee assignments
 # until every timeslot is sufficiently filled.
 init_solution <- function(instance) {
-    print("hey")
+    sol <- rbind(new_assignment(instance))
+    while (!check_solution(sol, instance)) {
+        assignment <- new_assignment(instance)
+        sol <- rbind(sol,assignment)
+    }
+    return(sol)
 }
 
 # Generates a random assignment for the GDODOSP
 new_assignment <- function(instance) {
-    print("making a new dude")
     assignment = rep(FALSE,instance$t)
     working <- sample(c(TRUE,FALSE),1)
     day <- 1
@@ -21,11 +25,10 @@ new_assignment <- function(instance) {
         }
         if (day==1) { min <- 1 }
         dur = sample(min:max,1)
-        assignment[day:max(day-1+dur,instance$t)] = working
+        assignment[day:min(day-1+dur,instance$t)] = working
         day <- day + dur
         working <- !working
     }
-    print(assignment)
     return(assignment)
 }
 
@@ -68,4 +71,8 @@ check_assignment <- function(assignment,instance) {
 lahc <- function() {
     sol <- FALSE
     return(sol)
+}
+
+replace_assignment = function(sol) {
+    print('ejtoseg')
 }
