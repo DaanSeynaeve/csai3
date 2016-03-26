@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9) (preloaded format=pdflatex 2015.10.5)  26 MAR 2016 12:27
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9) (preloaded format=pdflatex 2015.10.5)  26 MAR 2016 16:59
 entering extended mode
 **verslag_heuristics.tex
 (verslag_heuristics.tex
@@ -459,23 +459,51 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 567.
 LaTeX Info: Redefining \[ on input line 2665.
 LaTeX Info: Redefining \] on input line 2666.
 )
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\algorithms\algorithmic.sty"
+Package: algorithmic 2009/08/24 v0.1 Document Style `algorithmic'
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\ifthen.sty"
+Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
+)
+\c@ALC@unique=\count111
+\c@ALC@line=\count112
+\c@ALC@rem=\count113
+\c@ALC@depth=\count114
+\ALC@tlm=\skip47
+\algorithmicindent=\skip48
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\algorithms\algorithm.sty"
+Package: algorithm 2009/08/24 v0.1 Document Style `algorithm' - floating enviro
+nment
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\float\float.sty"
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count115
+\float@exts=\toks22
+\float@box=\box28
+\@float@everytoks=\toks23
+\@floatcapt=\box29
+)
+\@float@every@algorithm=\toks24
+\c@algorithm=\count116
+)
 (verslag_heuristics.aux)
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-\AtBeginShipoutBox=\box28
-Package hyperref Info: Link coloring OFF on input line 16.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+\AtBeginShipoutBox=\box30
+Package hyperref Info: Link coloring OFF on input line 18.
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\hyperref\nameref.sty"
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
@@ -483,50 +511,81 @@ Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\gettitlestring.sty"
 Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
-\c@section@level=\count111
+\c@section@level=\count117
 )
-LaTeX Info: Redefining \ref on input line 16.
-LaTeX Info: Redefining \pageref on input line 16.
-LaTeX Info: Redefining \nameref on input line 16.
+LaTeX Info: Redefining \ref on input line 18.
+LaTeX Info: Redefining \pageref on input line 18.
+LaTeX Info: Redefining \nameref on input line 18.
 
 (verslag_heuristics.out) (verslag_heuristics.out)
 \@outlinefile=\write3
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count112
+\scratchcounter=\count118
 \scratchdimen=\dimen119
-\scratchbox=\box29
-\nofMPsegments=\count113
-\nofMParguments=\count114
-\everyMPshowfont=\toks22
-\MPscratchCnt=\count115
+\scratchbox=\box31
+\nofMPsegments=\count119
+\nofMParguments=\count120
+\everyMPshowfont=\toks25
+\MPscratchCnt=\count121
 \MPscratchDim=\dimen120
-\MPnumerator=\count116
-\makeMPintoPDFobject=\count117
-\everyMPtoPDFconversion=\toks23
+\MPnumerator=\count122
+\makeMPintoPDFobject=\count123
+\everyMPtoPDFconversion=\toks26
 ) [1
 
 {C:/Users/Temp/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
-(verslag_heuristics.bbl)
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 44.
- [2]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 44.
+Overfull \hbox (8.6732pt too wide) in paragraph at lines 38--39
+$\OML/cmm/m/it/10 t \OT1/cmr/m/n/10 = 11$, $\OML/cmm/m/it/10 d[] \OT1/cmr/m/n/1
+0 = 4$, $\OML/cmm/m/it/10 d[] \OT1/cmr/m/n/10 = 9$, $\OML/cmm/m/it/10 o[] \OT1/
+cmr/m/n/10 = 1$, $\OML/cmm/m/it/10 o[] \OT1/cmr/m/n/10 = 8$, $\OML/cmm/m/it/10 
+b \OT1/cmr/m/n/10 = [18\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 19\OML/cmm/m/it/10 ; 
+\OT1/cmr/m/n/10 17\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 16\OML/cmm/m/it/10 ; \OT1/
+cmr/m/n/10 13\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 13\OML/cmm/m/it/10 ; \OT1/cmr/m
+/n/10 14\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 13\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10
+ 13\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 18\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 15]$
+. 
+ []
+
+
+LaTeX Warning: Reference `alg:mutation' on page 2 undefined on input line 46.
+
+
+LaTeX Warning: Reference `sec:neighbourhoods' on page 2 undefined on input line
+ 46.
+
+Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
+put line 49.
+(verslag_heuristics.bbl [2] [3])
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 84.
+ [4]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 84.
  (verslag_heuristics.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 44.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 44.
-Package rerunfilecheck Info: File `verslag_heuristics.out' has not changed.
-(rerunfilecheck)             Checksum: 11FFD57C953248110391D08D6737249F;115.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 44.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 84.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 84.
+
+
+Package rerunfilecheck Warning: File `verslag_heuristics.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `verslag_heuristics.out':
+(rerunfilecheck)             Before: 4CA9723F9FECA0CDADDB0DDADAFFC93E;163
+(rerunfilecheck)             After:  34CF103632C645B1B374FB2A9C5740D9;292.
+
+LaTeX Warning: There were undefined references.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 84.
  ) 
 Here is how much of TeX's memory you used:
- 6133 strings out of 493673
- 87002 string characters out of 3141533
- 179444 words of memory out of 3000000
- 9422 multiletter control sequences out of 15000+200000
- 9062 words of font info for 33 fonts, out of 3000000 for 9000
+ 6444 strings out of 493673
+ 90887 string characters out of 3141533
+ 189997 words of memory out of 3000000
+ 9693 multiletter control sequences out of 15000+200000
+ 9369 words of font info for 34 fonts, out of 3000000 for 9000
  1025 hyphenation exceptions out of 8191
- 29i,6n,28p,786b,336s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 29i,6n,28p,786b,707s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx10.pfb>
 <C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C
 :/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/
@@ -535,12 +594,13 @@ gram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Progra
 m Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program F
 iles (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Program File
 s (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Program Files (x
-86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files (x86
-)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Program Files (x86)/M
-iKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on verslag_heuristics.pdf (2 pages, 137729 bytes).
+86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files (x86)/
+MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files (x86)/Mi
+KTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Program Files (x86)/MiKTe
+X 2.9/fonts/type1/public/amsfonts/cm/cmti10.pfb>
+Output written on verslag_heuristics.pdf (4 pages, 162352 bytes).
 PDF statistics:
- 80 PDF objects out of 1000 (max. 8388607)
- 12 named destinations out of 1000 (max. 500000)
- 17 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 128 PDF objects out of 1000 (max. 8388607)
+ 38 named destinations out of 1000 (max. 500000)
+ 25 words of extra memory for PDF output out of 10000 (max. 10000000)
 

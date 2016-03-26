@@ -8,6 +8,8 @@
 \usepackage{graphicx}
 %\usepackage{cite}
 \usepackage{amsmath}
+\usepackage[]{algorithmic}
+\usepackage{algorithm}
 
 \title{Heuristics -- Report
 	Capita Selecta AI}
@@ -22,22 +24,60 @@ The combinatorial problem we try to solve is the following.
 \textit{The Day-on/Day-off scheduling problem (DODOSP) asks for the assignment of a number employees to on and off periods in such a way that, over a given timespan of $t$ days, a certain minimal demand $b_s$ for each day $0 \leq s < t$ is satisfied. Constraints on the lengths of day-on, respectively day-off, periods are given as intervals $[d^-,d^+]$, respectively $[o^-,o^+]$. In the general setting, each employee can be assigned any set of day-on/day-off schemes where it is assumed that an assignment can start and end with an arbitrary number of days off or on less than the upper bounds of the intervals. An example of a more restricted setting is when each assignment to an employee must be a cyclic permutation of a given assignment.}
 
 First, we write a generator for combinatorial problems of both the general and the cyclic types. Then, we devise a heuristic for this problem that combines the Late Acceptance Hill Climbing heuristic \cite{burke2012late} with the different variable neighbourhoods first used in Variable Neighbourhood Search, a heuristic introduced by Mladenovi{\'c} and Hansen. \cite{mladenovic1997variable} Finally, we tune the parameters of our heuristic using the \textbf{irace} package \cite{LopDubStu2011irace} and report our results.
-\section{Generating scheduling problems.}
+\section{Generating scheduling problems}
 We were advised to base our randomly generated problem on real world scheduling problems. One author has worked in a small supermarket. The other one had a student job as a waiter at a restaurant. We used these experiences as a basis for realistic problem instances.
 
 \paragraph{Supermarket}
-The first problem is the following. Consider a small supermarket, it has to be open every day for a full week. The time unit for which we assign employees is half a day. Employees have to work at least an entire day and can work at most three consecutive days. They also have to rest for at least an entire day, but can not rest for more than two days straight. Usually only two people are needed to open the shop. Except on Wednesdays and during the weekend, where three or four people are needed.
-The problem specification thus becomes: $t=14$, $d^- = 2$, $d^+ = 6$, $o^- = 2$, $o^+ = 6$, $b = [2,2,2,2,3,3,2,2,2,3,3,3,4,3]$.
+The first problem is the following. Consider a small supermarket, it has to be open every day for a full week. The time unit for which we assign employees is half a day. Employees have to work at least an entire day and can work at most three consecutive days. They also have to rest for at least an entire day, but can not rest for more than two days straight. Usually only two people are needed to open the shop. Except on Wednesdays and during the weekend, where three or four people are needed. The problem specification thus becomes: $t=14$, $d^- = 2$, $d^+ = 6$, $o^- = 2$, $o^+ = 6$, $b = [2,2,2,2,3,3,2,2,2,3,3,3,4,3]$.
 
 \paragraph{Restaurant}
 Consider a relatively large restaurant. It is open for most of the day. Employees get a time schedule for the day measured in hours. They have to work at least three hours straight and have to take a break after at most eight hours. Exactly the same time constraints hold for the off period. The workday starts at 8h00 in the morning and ends at midnight. About ten employees are needed to keep the restaurant running when it is calm, but during lunch and dinner, the restaurant needs at least twice as much employees to keep things running smoothly.
-The more formal problem specification is the following:
-$t=16$, $d^- = 3$, $d^+ = 8$, $o^- = 3$, $o^+ = 8$, $b = [10,10,15,15,20,20,20,15,15,15,20,20,20,20,15,10]$
+The more formal problem specification is the following:$t=16$, $d^- = 3$, $d^+ = 8$, $o^- = 3$, $o^+ = 8$, $b = [10,10,15,15,20,20,20,15,15,15,20,20,20,20,15,10]$
 
 \paragraph{Random scheduling problems}
-We noticed that even though the time units and underlying contexts were different, both scheduling problems were actually quite similar, apart from the needed employees. We suspect that this is also the case for other real world scheduling problems. Therefore, we have implemented a generator for scheduling problems somewhere on the spectrum between the supermarket and restaurant problem instance. An example of such a randomly generated problem is the following:
-$t=11$, $d^- = 4$, $d^+ = 9$, $o^- = 1$, $o^+ = 8$, $b = [18,19,17,16,13,13,14,13,13,18,15]$
+We noticed that even though the time units and underlying contexts were different, both the supermarket and restaurant scheduling problems were actually quite similar, apart from the needed employees. We suspect that this is also the case for other real world scheduling problems. Therefore, we have implemented a generator for scheduling problems somewhere on the spectrum between the supermarket and restaurant problem instance. An example of such a randomly generated problem is the following: $t=11$, $d^- = 4$, $d^+ = 9$, $o^- = 1$, $o^+ = 8$, $b = [18,19,17,16,13,13,14,13,13,18,15]$.
 
+\paragraph{Cyclic problems}
+To easily generate cyclic problems, we implemented a function that converts a general scheduling problem to a cyclic scheduling problem by randomly generating an assignment that satisfies the on and off constraints for each employee.
+An example of a cyclic problem specification for the supermarket is the following:
+$assignment = [1,1,0,0,0,0,1,1,1,1,1,1,0,0$, $b = [2,2,2,2,3,3,2,2,2,3,3,3,4,3]$.
+
+\section{The heuristic}
+Our heuristic is a slightly modified version of the standard Late Acceptance Hill Climbing algorithm presented in \cite{burke2012late}. See Algorithm \ref{alg:lahc} for pseudocode of our heuristic. On line 6, we construct a new candidate solution. We do this by randomly selecting a neighbourhood and using this neighbourhood to mutate our current solution. Pseudocode for this procedure is given in Algorithm \ref{alg:mutation}. In subsection \ref{sec:neighbourhoods}, we discuss the neighbourhoods of our heuristic.
+
+\begin{algorithm}                      % enter the algorithm environment
+	\caption{LAHC with imperfect mutation operator}% which may fail}          % give the algorithm a caption
+	\label{alg:lahc}                           % and a label for \ref{} commands later in the document
+	\algsetup{indent=2em}
+	\begin{algorithmic}[1]                    % enter the algorithmic environment
+		\REQUIRE $s \leftarrow$ initial solution
+		\REQUIRE $lfa \leftarrow$ length fitness array
+		\REQUIRE $n \leftarrow$ maximum number of iterations
+		\STATE Calculate initial cost function $C(s)$
+		\STATE For all $k \in \{0..lfa-1\}$ $f_k \leftarrow C(s)$
+		\STATE Initialize the iteration number: $i \leftarrow 0$
+		\STATE Initialize the fitness position: $j \leftarrow 0$
+		\WHILE{$i < n$}
+		\STATE Construct new candidate solution $s^*$
+		\IF{$s^*$ is a valid solution}
+			\STATE Calculate cost function $C(s^*)$
+			\STATE $v \leftarrow j$ \textbf{mod} $lfa$
+			\IF{$C(s^*) \leq f_v$ \OR $C(s^*) \leq C(s)$}
+				\STATE Accept new solution: $s \leftarrow s^*$
+			\ELSE
+				\STATE Reject new solution: $s \leftarrow s$
+			\ENDIF
+			\STATE Insert the current cost in the fitness array: $f_v \leftarrow C(s)$
+			\STATE Increment the fitness position: $j \leftarrow j+1$
+		\ENDIF
+		\STATE Increment the iteration number: $i \leftarrow i+1$
+		\ENDWHILE
+	\end{algorithmic}
+\end{algorithm}
+
+\subsection{Neighbourhoods}
+
+\section{Paremeter tuning \& Results}
 
 \bibliography{references}
 \bibliographystyle{plain}
