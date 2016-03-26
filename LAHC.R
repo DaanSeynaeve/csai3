@@ -19,6 +19,7 @@ lahc <- function(instance, Lfa, max_iterations, init, neighbourhoods, p, verbose
     if (verbose) {
         print('------ init ------')
         print(fn_c(s))
+        start.time <- Sys.time()
         print('------ start ------')
     }
     i <- 0
@@ -44,6 +45,7 @@ lahc <- function(instance, Lfa, max_iterations, init, neighbourhoods, p, verbose
         print('------ finished ------')
         print(c("fitness:",fn_c(s)))
         print(c("#candidates:",f_pos))
+        print(Sys.time() - start.time)
     }
     return(list(sol=s,res=fn_c(s)))
 }

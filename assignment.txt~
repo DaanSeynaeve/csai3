@@ -1,0 +1,54 @@
+Assignment heursitics 2015-1016
+
+The Day-on/Day-off scheduling problem (DODOSP) asks for the assignment of a number employees to on and off periods in such a way that, over a given timespan of t days, a certain minimal demand b_s for each day 0 <= s < t is satisfied. Constraints on the lengths of day-on, respectively day-off, periods are given as intervals [d^-,d^+], respectively [o^-,o^+]. In the general setting, each employee can be assigned any set of day-on/day-off schemes where it is assumed that an assignment can start and end with an arbitrary number of days off or on less than the upper bounds of the intervals. We will address this problem as the GDODOSP. An example of a more restricted setting is when each assignment to an employee must be a cyclic permutation of a given assignment. We will address this problem as the CDODOSP.
+
+Example of GDODOSP:
+
+t = 7, d^- = 1, d^+ = 4, o^- = 1, o^- = 2
+b = [3,3,3,3,3,2,2] 
+
+A possible solution with 4 employees is (on days are denoted by 1,off days are denoted by 0): 
+[1,1,1,1,0,1,0]
+[0,1,1,1,1,0,1]
+[1,1,1,0,1,1,0]
+[1,0,1,1,1,0,1]
+
+This solution has in total 20 assignments, while 19 is the minimum required. 
+A solution with 5 employees and 19 assignments is given by
+[1,1,0,0,1,1,0]
+[1,0,1,1,0,0,1]
+[1,1,0,0,1,1,0]
+[0,1,1,1,0,0,1]
+[0,0,1,1,1,0,0]
+
+The objective can be the number of employees or the number of assignments.
+
+Example of CDODOSP:
+
+As before, but the basic assignment is [1,1,0,1,1,1,0], and only cyclic permutations are allowed:
+[1,1,0,1,1,1,0]
+[1,1,0,1,1,1,0]
+[1,1,1,0,1,1,0]
+[0,1,1,0,1,1,1]
+[1,0,1,1,0,1,1]
+
+The objective is to minimize the number of employees.
+
+Task:
+
+1. Write a generator for random GDODOSP and CDODOSP's.
+2. Read about two metaheuristics:
+	'Variable Neighborhood Search' (VNS)
+	'Late acceptance hill climber' (LAHC)
+3. Design neighborhoods for GDODOSP and use them in a LAHC or a VNS algorithm.
+4. For CDODOSP, use neighborhoods that replace a number x of cyclic permutations in a LAHC or a VNS where the size of the neighborhood increases with x.
+5. Download and install the irace algorithm tuning software.
+6. Apply irace to tune the LAHC or the VNS.
+7. Can the (tuned) VNS(LAHC) be applied to the GDODOSP? If so, how well does it perform?
+
+
+
+
+
+
+

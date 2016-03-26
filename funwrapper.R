@@ -11,4 +11,5 @@ while(i< length(args)) {
 }
 source("LAHC.R")
 maxit= 500
-cat(lahc(instance,lfa,maxit,FALSE))
+p <- c(1,1,1,1,1,1,1,1)
+cat(gsp_lahc(instance,lfa,maxit,p,FALSE)$res)
