@@ -33,8 +33,7 @@ royal <- function() {
 delhaize_royal_spectrum <- function(t=NA,b_min=NA,b_max=NA) {
   if(is.na(t)) t = sample(10:20,1)
   if(is.na(b_min)) b_min = sample(1:20,1)
-  if(is.na(b_max)) b_max = sample(b_min:2*b_min,1)
-  
+  if(is.na(b_max)) b_max = sample(b_min:(2*b_min),1)
   list(t=t,
        on_min=sample(1:4,1),
        on_max=sample(4:10,1),
