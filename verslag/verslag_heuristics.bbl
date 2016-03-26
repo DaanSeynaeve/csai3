@@ -1,0 +1,21 @@
+\begin{thebibliography}{1}
+
+\bibitem{burke2012late}
+Edmund~K Burke and Yuri Bykov.
+\newblock The late acceptance hill-climbing heuristic.
+\newblock {\em University of Stirling, Tech. Rep}, 2012.
+
+\bibitem{LopDubStu2011irace}
+Manuel L{\'o}pez-Ib{\'a}{\~n}ez, J{\'e}r{\'e}mie Dubois-Lacoste, Thomas
+  St{\"u}tzle, and Mauro Birattari.
+\newblock The irace package, iterated race for automatic algorithm
+  configuration.
+\newblock Technical Report TR/IRIDIA/2011-004, IRIDIA, Universit{\'e} Libre de
+  Bruxelles, Belgium, 2011.
+
+\bibitem{mladenovic1997variable}
+Nenad Mladenovi{\'c} and Pierre Hansen.
+\newblock Variable neighborhood search.
+\newblock {\em Computers \& Operations Research}, 24(11):1097--1100, 1997.
+
+\end{thebibliography}
