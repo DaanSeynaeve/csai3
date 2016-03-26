@@ -43,7 +43,7 @@ An example of a cyclic problem specification for the supermarket is the followin
 $assignment = [1,1,0,0,0,0,1,1,1,1,1,1,0,0$, $b = [2,2,2,2,3,3,2,2,2,3,3,3,4,3]$.
 
 \section{The heuristic}
-Our heuristic is a slightly modified version of the standard Late Acceptance Hill Climbing algorithm presented in \cite{burke2012late}. See Algorithm \ref{alg:lahc} for pseudocode of our heuristic. On line 6, we construct a new candidate solution. We do this by randomly selecting a neighbourhood and using this neighbourhood to mutate our current solution. Pseudocode for this procedure is given in Algorithm \ref{alg:mutation}. In subsection \ref{sec:neighbourhoods}, we discuss the neighbourhoods of our heuristic.
+Our heuristic is a slightly modified version of the standard Late Acceptance Hill Climbing algorithm presented in \cite{burke2012late}. See Algorithm \ref{alg:lahc} for pseudocode of our heuristic. On line 6, we construct a new candidate solution. We do this by randomly selecting a neighbourhood and using this neighbourhood to mutate our current solution. Pseudocode for this procedure is given in Algorithm \ref{alg:mutation}. In subsection \ref{subsec:neighbourhoods}, we discuss the neighbourhoods of our heuristic.
 
 \begin{algorithm}                      % enter the algorithm environment
 	\caption{LAHC with imperfect mutation operator}% which may fail}          % give the algorithm a caption
@@ -76,6 +76,18 @@ Our heuristic is a slightly modified version of the standard Late Acceptance Hil
 \end{algorithm}
 
 \subsection{Neighbourhoods}
+\label{subsec:neighbourhoods}
+\subsubsection{General scheduling problem}
+\paragraph{Replace}
+\paragraph{Shrink}
+\paragraph{Left shift}
+\paragraph{AND operator}
+\paragraph{XOR operator}
+\paragraph{Vertical swap}
+\paragraph{Bitflip}
+\subsubsection{Cyclic scheduling problem}
+\paragraph{k-l Replace}
+\paragraph{k-shift}
 
 \section{Paremeter tuning \& Results}
 

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9) (preloaded format=pdflatex 2015.10.5)  26 MAR 2016 16:59
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9) (preloaded format=pdflatex 2015.10.5)  26 MAR 2016 17:10
 entering extended mode
 **verslag_heuristics.tex
 (verslag_heuristics.tex
@@ -551,38 +551,28 @@ cmr/m/n/10 13\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 13\OML/cmm/m/it/10 ; \OT1/cmr/m
 
 LaTeX Warning: Reference `alg:mutation' on page 2 undefined on input line 46.
 
-
-LaTeX Warning: Reference `sec:neighbourhoods' on page 2 undefined on input line
- 46.
-
 Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
 put line 49.
-(verslag_heuristics.bbl [2] [3])
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 84.
+[2] [3] (verslag_heuristics.bbl)
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 96.
  [4]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 84.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 96.
  (verslag_heuristics.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 84.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 84.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 96.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 96.
+Package rerunfilecheck Info: File `verslag_heuristics.out' has not changed.
+(rerunfilecheck)             Checksum: 6F8762565777F271CFB1F788C8A20CD0;463.
 
-
-Package rerunfilecheck Warning: File `verslag_heuristics.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `verslag_heuristics.out':
-(rerunfilecheck)             Before: 4CA9723F9FECA0CDADDB0DDADAFFC93E;163
-(rerunfilecheck)             After:  34CF103632C645B1B374FB2A9C5740D9;292.
 
 LaTeX Warning: There were undefined references.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 84.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 96.
  ) 
 Here is how much of TeX's memory you used:
- 6444 strings out of 493673
- 90887 string characters out of 3141533
- 189997 words of memory out of 3000000
- 9693 multiletter control sequences out of 15000+200000
+ 6459 strings out of 493673
+ 91092 string characters out of 3141533
+ 189047 words of memory out of 3000000
+ 9697 multiletter control sequences out of 15000+200000
  9369 words of font info for 34 fonts, out of 3000000 for 9000
  1025 hyphenation exceptions out of 8191
  29i,6n,28p,786b,707s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -598,9 +588,8 @@ s (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Program Files (x
 MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files (x86)/Mi
 KTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Program Files (x86)/MiKTe
 X 2.9/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on verslag_heuristics.pdf (4 pages, 162352 bytes).
+Output written on verslag_heuristics.pdf (4 pages, 167808 bytes).
 PDF statistics:
- 128 PDF objects out of 1000 (max. 8388607)
- 38 named destinations out of 1000 (max. 500000)
- 25 words of extra memory for PDF output out of 10000 (max. 10000000)
-
+ 154 PDF objects out of 1000 (max. 8388607)
+ 49 named destinations out of 1000 (max. 500000)
+ 57 words of extra memory for PDF output out of 10000 (max. 10000000)
