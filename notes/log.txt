@@ -14,3 +14,10 @@ Daan: Programmeren van LAHC en neighbourhoods
 16:55 15/03/2016 2u
 Tom: Irace gekoppeld aan LAHC. Door runnen van random voorbeelden fout gevonden in Daan zijn code. Hihi.
 Daan: verder geprogrammeerd aan neighbourhoods en LAHC
+
+12:31 22/03/2016 1U
+Gebrainstormd over meer parameters voor het LAHC probleem.
+Conclusie:
+- waarschijnlijkheid per neighbourhood als parameter en dan schalen.
+- onderscheid maken tussen algoritme-iteraties en fysieke iteraties
+  -> aanpassen stopcriterium
