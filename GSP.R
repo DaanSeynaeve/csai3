@@ -91,7 +91,7 @@ gsp_bitflip <- function(sol, instance) {
     sol[e,d] <- !sol[e,d]
     
     if (check_assignment(sol[e,],instance) && check_solution(sol,instance)) {
-        return(sol2)
+        return(sol)
     } else {
         return(NULL)
     }
@@ -154,7 +154,7 @@ gsp_shrink <- function(sol, instance) {
 gsp_repair <- function(sol, instance) {
     while (!check_solution(sol, instance)) {
         employee <- gsp_new_assigment(instance)
-        sol <- rbind(sol2,employee)
+        sol <- rbind(sol,employee)
     }
     return(sol)
 }
