@@ -47,7 +47,7 @@ gsp_combine <- function(sol, instance, fn_combine) {
     parent_idx <- sample(1:dim(sol)[1],2)
     e_new <- fn_combine(sol[parent_idx,])
     if (check_assignment(e_new,instance)) {
-        sol <- rbind(sol[-parent_idx,],b)
+        sol <- rbind(sol[-parent_idx,],e_new)
         if (check_solution(sol,instance)) {
             return(sol)
         } else {
