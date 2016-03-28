@@ -35,15 +35,15 @@ gsp_init_solution <- function(instance) {
 #' Always produces a new solution by randomly deleting an employee assignment
 #' and generating new assignments to replace it
 gsp_replace <- function(sol, instance) {
-    r <- sample(1:dim(sol)[1],1)
-    sol2 <- sol[-r,]
-    return(gsp_repair(sol2, instance))
+    sol <- rbind(sol[-sample(1:dim(sol)[1],1),])
+    return(gsp_repair(sol, instance))
 }
 
 #' Neighbourhood - Combine
 #' Maybe produce a new solution by combining two employee assignments into a new one
 #' @param fn_combine; function that takes a matrix of 2 rows and combines them
 gsp_combine <- function(sol, instance, fn_combine) {
+    if (dim(sol)[1] < 2) return(NULL)
     parent_idx <- sample(1:dim(sol)[1],2)
     e_new <- fn_combine(sol[parent_idx,])
     if (check_assignment(e_new,instance)) {
@@ -61,18 +61,19 @@ gsp_combine <- function(sol, instance, fn_combine) {
 #' Neighbourhood - Vertical Swap
 #' Maybe produce a new solution by swapping the assignment of a timeslot between two employees
 gsp_vswap <- function(sol, instance) {
+    if (dim(sol)[1] < 2) return(NULL)
     e <- sample(1:dim(sol)[1],2)
     d <- sample(1:dim(sol)[2],1)
     
-    a <- sol[e[2],d]
+    tmp <- sol[e[2],d]
     sol[e[2],d] <- sol[e[1],d]
-    sol[e[1],d] <- a
+    sol[e[1],d] <- tmp
     
     if(check_assignment(sol[e[1],],instance) && check_assignment(sol[e[2],], instance)) {
-        if (check_solution(sol[-e[1],],instance)) {
-            return(sol[-e[1],])
-        } else if (check_solution(sol[-e[2],],instance)) {
-            return(sol[-e[2],])
+        if (check_solution(rbind(sol[-e[1],]),instance)) {
+            return(rbind(sol[-e[1],]))
+        } else if (check_solution(rbind(sol[-e[2],]),instance)) {
+            return(rbind(sol[-e[2],]))
         } else {
             return(NULL)
         }
@@ -139,8 +140,8 @@ gsp_lshift <- function(sol, instance) {
 #' Maybe produce a new solution by removing a random employee assignment
 gsp_shrink <- function(sol, instance) {
     e <- sample(1:dim(sol)[1],1)
-    if (check_solution(sol[-e,], instance)) {
-        return(sol[-e,])
+    if (check_solution(rbind(sol[-e,]), instance)) {
+        return(rbind(sol[-e,]))
     } else {
         return(NULL)
     }

@@ -11,7 +11,7 @@
 #' @param verbose; set to FALSE to surpress output
 lahc <- function(instance, Lfa, max_iterations, init, neighbourhoods, p, verbose) {
     fn_mut = function(x) {neighbourhood_weighted(x,instance,neighbourhoods,p)}
-    fn_c = cost2
+    fn_c = cost
     
     s <- init(instance)
     f <- rep(fn_c(s),Lfa)
@@ -50,6 +50,7 @@ lahc <- function(instance, Lfa, max_iterations, init, neighbourhoods, p, verbose
 
 #' Apply a random neighbourhood selected from a given set with given probabilities
 neighbourhood_weighted <- function(sol, instance, neighbourhoods, p) {
+    # print(list("s:",sol))
     pcum <- cumsum(p)
     # x <- sample(1:tail(pcum,n=1),1)
     x <- runif(1,0,tail(pcum,n=1))
