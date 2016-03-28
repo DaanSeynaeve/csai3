@@ -11,7 +11,7 @@
 #' @param verbose; set to FALSE to surpress output
 lahc <- function(instance, Lfa, max_iterations, init, neighbourhoods, p, verbose) {
     fn_mut = function(x) {neighbourhood_weighted(x,instance,neighbourhoods,p)}
-    fn_c = cost
+    fn_c = cost2
     
     s <- init(instance)
     f <- rep(fn_c(s),Lfa)
@@ -36,10 +36,8 @@ lahc <- function(instance, Lfa, max_iterations, init, neighbourhoods, p, verbose
             }
             f[v] <- fn_c(s)
             f_pos = f_pos + 1
-            # print("tick")
         }
         i <- i + 1
-        # print("tock")
     }
     if (verbose) {
         print('------ finished ------')

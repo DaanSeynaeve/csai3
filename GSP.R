@@ -9,7 +9,7 @@ gsp_lahc <- function(instance, Lfa, max_iterations, p, verbose) {
     fnlist_neighbourhood <- c(
         function(sol, inst) {gsp_replace(sol,inst)},
         function(sol, inst) {gsp_shrink(sol,inst)},
-        function(sol, inst) {gsp_lshift2(sol,inst)},
+        function(sol, inst) {gsp_lshift(sol,inst)},
         function(sol, inst) {gsp_combine(sol,inst,and_)},
         function(sol, inst) {gsp_combine(sol,inst,or_)},
         function(sol, inst) {gsp_combine(sol,inst,xor_)},
@@ -44,10 +44,10 @@ gsp_replace <- function(sol, instance) {
 #' Maybe produce a new solution by combining two employee assignments into a new one
 #' @param fn_combine; function that takes a matrix of 2 rows and combines them
 gsp_combine <- function(sol, instance, fn_combine) {
-    a <- sol[sample(1:dim(sol)[1],2),]
-    b <- fn_combine(a)
-    if (check_assignment(b,instance)) {
-        sol <- rbind(sol[-a],b)
+    parent_idx <- sample(1:dim(sol)[1],2)
+    e_new <- fn_combine(sol[parent_idx,])
+    if (check_assignment(e_new,instance)) {
+        sol <- rbind(sol[-parent_idx,],b)
         if (check_solution(sol,instance)) {
             return(sol)
         } else {
@@ -126,7 +126,7 @@ gsp_lshift <- function(sol, instance) {
     if (sample(c(TRUE,FALSE),1)) {
         sol[e,] <- c(sol[e,2:len],a)
     } else {
-        sol[,e] <- c(a,sol[e,1:len-1])
+        sol[e,] <- c(a,sol[e,1:len-1])
     }
     if (check_assignment(sol[e,], instance) && check_solution(sol,instance)) {
         return(sol)
