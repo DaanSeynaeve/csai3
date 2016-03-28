@@ -90,6 +90,7 @@ convert_to_cyclic_problem <- function(gdodosp) {
     on = !on
   }
   list(b = gdodosp$b,
+       t = gdodosp$t,
        assignment = assignment[1:gdodosp$t])
 }
 
