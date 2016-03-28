@@ -12,7 +12,7 @@ instanceDir <- "./instances"
 
 #parallel <- 1
 
-maxExperiments <- 1000
+maxExperiments <- 500
 
 hookRun <- "./hookrun.cmd"
 
