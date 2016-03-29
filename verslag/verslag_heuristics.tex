@@ -93,6 +93,30 @@ Our heuristic is a slightly modified version of the standard Late Acceptance Hil
 % Research questions
 % Does changing the goal significantly change the solution?
 % What neighbourhoods are dominant, and which neighbourhoods are useless?
+\begin{verbatim}
+# Best candidates
+    lfa   p1   p2   p3   p4   p5   p6   p7   p8
+593   1 0.84 0.55 0.38 0.07 0.65 0.05 0.16 0.83
+448   1 0.73 0.78 0.51 0.14 0.69 0.15 0.10 0.93
+627   1 0.63 0.70 0.39 0.10 0.74 0.13 0.25 0.96
+590   2 0.81 0.38 0.35 0.03 0.84 0.11 0.40 0.86
+563   1 0.81 0.72 0.48 0.02 0.70 0.23 0.20 0.91
+\end{verbatim}
+
+\begin{table}[]
+	\centering
+	\caption{My caption}
+	\label{my-label}
+	\begin{tabular}{lccccccccc}
+		id & lfa & replace & shrink & shift & AND & OR & XOR & Vertical Swap & bitflip\\
+		593 &1 &0.84 &0.55 &0.38 &0.07 &0.65 &0.05 &0.16 &0.83 \\
+		448 &  1& 0.73& 0.78 &0.51& 0.14 &0.69& 0.15& 0.10 &0.93 \\
+		627  & 1 &0.63 &0.70 &0.39 &0.10& 0.74 &0.13 &0.25 &0.96 \\
+		590  & 2 &0.81 &0.38 &0.35 &0.03 &0.84 &0.11 &0.40 &0.86 \\
+		563  & 1 &0.81 &0.72 &0.48& 0.02 &0.70& 0.23 &0.20& 0.91 \\
+	\end{tabular}
+\end{table}
+
 %% Groot of klein verschil tussen optimale parameters van delhaize-royal-spectrum en binary matrix
 % Groot of klein verschil tussen optimale parameters voor grote of kleine t? We verwachten dat sommige neighbourhoods dominantie verliezen naarmate t groter wordt.
 % Groot of klein verschil tussen optimale parameters voor grote of kleine b_min/b_max
