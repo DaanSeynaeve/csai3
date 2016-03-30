@@ -108,7 +108,7 @@ A candidate in the combination neighbourhood is created by randomly selecting tw
 \paragraph{k-shift}
 
 \section{Paremeter tuning \& Results}
-Our heuristic has 9 parameters in total. The first one is the length of the fitness array. The other 8 are the relative weights for each neighbourhood that determine how frequently they get chosen to construct a new candidate solution. Using the irace package, we tuned these parameters to get some insight in our heuristic.
+Our heuristic for the general problem has 9 parameters in total. The first one is the length of the fitness array. The other 8 are the relative weights for each neighbourhood that determine how frequently they get chosen to construct a new candidate solution. Using the irace package, we tuned these parameters to get some insight in our heuristic.
 
 \paragraph{Simple test}
 We first wanted to know which of our neighbourhoods were good and which were bad. To do this, we constructed a simple test. We randomly generated 1000 examples from the spectrum between the supermarket and the restaurant example. We gave our heuristic 500 iterations to find the best solution. Then we gave irace 5000 iterations to optimize the performance of our heuristic and looked at the weights in the elite candidates. We theorize that the average weight of a neighbourhood is correlated with how good and important it is. You can see the relative weights for each neighbourhood in Figure \ref{fig:general}. We see that both the 'replace' and 'shrink' neighbourhood are important. The 'shift' neighbourhood is useful, but not overly dominant. Both the 'and' and 'xor' operators are pretty much useless. The 'or'-operator works surprisingly well though. 'Vertical swap' does not seem to contribute much, while the neighbourhood of random bitflips is incredibly important. Something else we noticed is that the best setting for the length of the fitness array was 1. This means that the Late Acceptance Hill Climbing strategy seems to have no added value for solving problems from this set.
@@ -143,23 +143,31 @@ We constructed two problem sets: one set with needed employees per time unit bet
 \end{figure}
 
 \paragraph{Number of iterations}
-Finally, we tested if there was any difference between the optimal parameters if we gave our heuristic less (100) or more (1000) iterations to solve the problem instances from the spectrum between the supermarket and the restaurant example. The results are presented in Figure \ref{fig:iterations}
-%TODO complete
+Finally, we tested if there was any difference between the optimal parameters if we gave our heuristic less (100) or more (1000) iterations to solve the problem instances from the spectrum between the supermarket and the restaurant example. The results are presented in Figure \ref{fig:iterations} Apart from maybe the 'bitflip' neighbourhood, we see no significant difference in weights or fitness array length between less or more iterations.
 
 \begin{figure}
-	\includegraphics[width=\textwidth]{boxplot_iterations.pdf}
+	\includegraphics[width=\textwidth]{boxplot_iteration.pdf}
 	\caption{Weights of the elite candidates for small and large number of iterations}
 	\label{fig:iterations}
 \end{figure}
 
-\paragraph{Cyclic instances}
-For the cyclic scheduling problem, we tested if one neighbourhood would be dominant over the other and if irace could learn that the L parameter should be lower than K for the 'K-L-replace' neighbourhood to be successful. Our results are presented in Figure \ref{fig:cyclic}.
-%TODO complete
-\begin{figure}
-	\includegraphics[width=\textwidth]{boxplot_cyclic.pdf}
-	\caption{Weights of the elite candidates for cyclic problem instances.}
-	\label{fig:cyclic}
-\end{figure}
+\paragraph{Cyclic problems}
+Our heuristic for the cyclic scheduling problem has 5 parameters in total: the length of the fitness array, the relative weights for its two neighbourhoods, and the $k$ and $l$ parameters for the '$k$-$l$ replace' neighbourhood. We tested if one neighbourhood would be dominant over the other and if irace could learn that the $l$ parameter should be lower than $k$ for the '$k$-$l$ replace' neighbourhood to be successful. The elite candidates found by irace are presented in Table \ref{tbl:cyclic}.
+
+\begin{table}[]
+	\centering
+	\begin{tabular}{lccccc}
+		\hline
+		id &lfa&   shift & k-l replace& k& l \\ \hline
+		564 & 14 &0.20& 0.80& 2 &1           \\
+		388  & 3 &0.49 &0.51 &2 &1           \\
+		624  &16 &0.40 &0.60 &2 &1           \\
+		562  & 6 &0.54 &0.46 &2 &1           \\ \hline
+	\end{tabular}
+	\caption{The elite candidates for the cyclic problems}
+	\label{tbl:cyclic}
+\end{table}
+We can see that the length of the fitness array does not have a significant influence on the performance of our heuristic. Neither shift nor 'k-l replace' are extremely dominant, they are both important neighbourhoods. Irace seems to have learned the optimal settings for both $k$ and $l$ with a lot of confidence, as they are the same for all elite candidates.
 
 
 % cyclic: 2 neighbourhoods
@@ -168,7 +176,7 @@ For the cyclic scheduling problem, we tested if one neighbourhood would be domin
 % We verwachten een lage optimale waarde voor k
 
 \section{Conclusions}
-
+We have shown how we generated combinatorial problems for both the general and cyclic scheduling problems based on real world data. We have explained how our heuristic works, focusing on our slight modification of the Late Acceptance Hill Climbing heuristic and our large variety of neighbourhoods. From tuning the parameters, we found out that the LAHC heuristic is useless and that some neighbourhoods are significantly more useful than others when dealing with smaller problems. For larger and more complex problems however, the recommended length of the fitness array grew and the variance of the relative weights of all neighbourhoods decreased, meaning that each neighbourhood contributed to the heuristic in some way. For cyclic problems, irace was able to easily learn the expected optimal setting for the '$k$-$l$ replace' heuristic.
 
 \bibliography{references}
 \bibliographystyle{plain}

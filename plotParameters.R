@@ -5,7 +5,7 @@ readExperiments <- function(filename,label) {
   parameters <- experiments[,-(1:2)]
 
   adj <- data.frame(t(apply(parameters,1,function(x) x/sum(x))))
-  adj$label <- label
+  #adj$label <- label
   return(adj)
 }
 
@@ -22,3 +22,5 @@ df.m <- melt(df, id.var = "label",variable.name = "neighbourhood", value.name = 
 
 require(ggplot2)
 ggplot(data = df.m, aes(x=neighbourhood, y=weight)) + geom_boxplot(aes(fill=label))
+
+df <- readExperiments("experiment_general.txt")
