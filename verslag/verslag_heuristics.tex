@@ -93,7 +93,8 @@ Our heuristic is a slightly modified version of the standard Late Acceptance Hil
 \section{Paremeter tuning \& Results}
 Our heuristic has 9 parameters in total. The first one is the length of the fitness array. The other 8 are the relative weights for each neighbourhood that determine how frequently they get chosen to construct a new candidate solution. Using the irace package, we tuned these parameters to get some insight in our heuristic.
 
-We first wanted to know which of our neighbourhoods were good and which were bad. To do this, we constructed a simple test. We randomly generated 1000 examples from the spectrum between the supermarket and the restaurant example. We gave our heuristic 500 iterations to find the best solution. Then we gave irace 5000 iterations to optimize the performance of our heuristic and looked at the weights in the elite candidates. We theorize that the average weight of a neighbourhood is correlated with how good and important it is. You can see the relative weights for each neighbourhood in Figure \ref{fig:general}. We see that both the 'replace' and 'shrink' neighbourhood are important. The 'shift' neighbourhood is useful, but not overly dominant. Both the 'and' and 'xor' operators are pretty much useless. The 'or'-operator works surprisingly well though. 'Vertical swap' does not seem to contribute much, while the neighbourhood of random bitflips is incredibly important.
+\paragraph{Simple test}
+We first wanted to know which of our neighbourhoods were good and which were bad. To do this, we constructed a simple test. We randomly generated 1000 examples from the spectrum between the supermarket and the restaurant example. We gave our heuristic 500 iterations to find the best solution. Then we gave irace 5000 iterations to optimize the performance of our heuristic and looked at the weights in the elite candidates. We theorize that the average weight of a neighbourhood is correlated with how good and important it is. You can see the relative weights for each neighbourhood in Figure \ref{fig:general}. We see that both the 'replace' and 'shrink' neighbourhood are important. The 'shift' neighbourhood is useful, but not overly dominant. Both the 'and' and 'xor' operators are pretty much useless. The 'or'-operator works surprisingly well though. 'Vertical swap' does not seem to contribute much, while the neighbourhood of random bitflips is incredibly important. Something else we noticed is that the best setting for the length of the fitness array was 1. This means that the Late Acceptance Hill Climbing strategy seems to have no added value for solving problems from this set.
 
 % Research questions
 % Does changing the goal significantly change the solution?
@@ -105,18 +106,44 @@ We first wanted to know which of our neighbourhoods were good and which were bad
 	\label{fig:general}
 \end{figure}
 
-Next, we wanted to know if there was any significant difference between the optimal parameters for problems with a small timespan (t = 10) and a large timespan (t=100). The elite candidates of both problem types are presented in figure \ref{fig:t}
+\paragraph{Timespan}
+Next, we wanted to know if there was any significant difference between the optimal parameters for problems with a small timespan ($t = 10$) and a large timespan ($t=100$). The elite candidates of both problem types are presented in figure \ref{fig:t} We don't notice any significant difference in neighbourhood weights, except that dominant neighbourhoods seem to become a bit less dominant, useless neighbourhoods for small problems gain some importance. One change that is significant is that the LAHC strategy is useful for problems with a larger timespan. The length of the fitness array of the elite candidates was 6-7 for $t = 100$, while it remained 1 for $t = 10$.
 
 \begin{figure}
 	\includegraphics[width=\textwidth]{boxplot_t.pdf}
 	\caption{Weights of the elite candidates for small and large t}
 	\label{fig:t}
 \end{figure}
-%% Groot of klein verschil tussen optimale parameters van delhaize-royal-spectrum en binary matrix
-% Groot of klein verschil tussen optimale parameters voor grote of kleine t? We verwachten dat sommige neighbourhoods dominantie verliezen naarmate t groter wordt.
-% Groot of klein verschil tussen optimale parameters voor grote of kleine b_min/b_max
-% Groot of klein verschil tussen optimale parameters voor groot of klein aantal iteraties.
-%Samengevat: we verwachten dat hoe complexer het probleem wordt, hoe minder dominant neighbourhoods zullen worden, en hoe langer de optimale lfa wordt.
+
+\paragraph{Needed employees}
+Next, we tested if there was any difference between the optimal parameters for problems with a low number of needed employees and problems with a high number of needed employees.
+We constructed two problem sets: one set with needed employees per time unit between 5 and 10, and one set with 50 to 100 needed employees per time unit. The results for the neighbourhood weights are presented in figure \ref{fig:b}. The 'replace', 'shrink' and 'shift' operators seem to have increased in importance, while the importance of the 'xor', 'vertical swap' and 'bitflip' operators seem to have been inverted. The length of the fitness array has also increased slightly, going from 1 to 4.
+
+\begin{figure}
+	\includegraphics[width=\textwidth]{boxplot_b.pdf}
+	\caption{Weights of the elite candidates for small and large numbers of needed employees}
+	\label{fig:b}
+\end{figure}
+
+\paragraph{Number of iterations}
+Finally, we tested if there was any difference between the optimal parameters if we gave our heuristic less (100) or more (1000) iterations to solve the problem instances from the spectrum between the supermarket and the restaurant example. The results are presented in Figure \ref{fig:iterations}
+%TODO complete
+
+\begin{figure}
+	\includegraphics[width=\textwidth]{boxplot_iterations.pdf}
+	\caption{Weights of the elite candidates for small and large number of iterations}
+	\label{fig:iterations}
+\end{figure}
+
+\paragraph{Cyclic instances}
+For the cyclic scheduling problem, we tested if one neighbourhood would be dominant over the other and if irace could learn that the L parameter should be lower than K for the 'K-L-replace' neighbourhood to be successful. Our results are presented in Figure \ref{fig:cyclic}.
+%TODO complete
+\begin{figure}
+	\includegraphics[width=\textwidth]{boxplot_cyclic.pdf}
+	\caption{Weights of the elite candidates for cyclic problem instances.}
+	\label{fig:cyclic}
+\end{figure}
+
 
 % cyclic: 2 neighbourhoods
 % 1 dominanat tov van de andere?

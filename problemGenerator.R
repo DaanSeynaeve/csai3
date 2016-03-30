@@ -94,7 +94,7 @@ convert_to_cyclic_problem <- function(gdodosp) {
        assignment = assignment[1:gdodosp$t])
 }
 
-generate_and_save_examples <- function(n=100,t=NA,examplesdir="instances_t100") {
+generate_and_save_examples <- function(n=1000,t=NA,examplesdir="instances") {
   dir.create(examplesdir)
   for (i in 1:n) {
     example <- delhaize_royal_spectrum(t)

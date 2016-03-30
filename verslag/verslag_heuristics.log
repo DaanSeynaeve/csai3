@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9) (preloaded format=pdflatex 2015.10.5)  30 MAR 2016 02:44
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9) (preloaded format=pdflatex 2015.10.5)  30 MAR 2016 17:21
 entering extended mode
 **verslag_heuristics.tex
 (verslag_heuristics.tex
@@ -557,52 +557,108 @@ put line 50.
 File: ../plots/boxplot_general.pdf Graphic file (type pdf)
 
 <use ../plots/boxplot_general.pdf>
-Package pdftex.def Info: ../plots/boxplot_general.pdf used on input line 103.
+Package pdftex.def Info: ../plots/boxplot_general.pdf used on input line 104.
 (pdftex.def)             Requested size: 345.0pt x 244.09178pt.
+ [4] [5pdfTeX warning (ext4): destination with the same identifier (name{figure
+.1}) has been already used, duplicate ignored
 
-<../plots/boxplot_t.pdf, id=97, 844.15375pt x 597.23125pt>
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.111 
+       <../plots/boxplot_general.pdf>]
+<../plots/boxplot_t.pdf, id=120, 844.15375pt x 597.23125pt>
 File: ../plots/boxplot_t.pdf Graphic file (type pdf)
 
 <use ../plots/boxplot_t.pdf>
-Package pdftex.def Info: ../plots/boxplot_t.pdf used on input line 111.
+Package pdftex.def Info: ../plots/boxplot_t.pdf used on input line 113.
 (pdftex.def)             Requested size: 345.0pt x 244.09178pt.
- (verslag_heuristics.bbl [4] [5pdfTeX warning (ext4): destination with the same
- identifier (name{figure.1}) has been already used, duplicate ignored
+
+<../plots/boxplot_b.pdf, id=122, 844.15375pt x 597.23125pt>
+File: ../plots/boxplot_b.pdf Graphic file (type pdf)
+
+<use ../plots/boxplot_b.pdf>
+Package pdftex.def Info: ../plots/boxplot_b.pdf used on input line 123.
+(pdftex.def)             Requested size: 345.0pt x 244.09178pt.
+ [6pdfTeX warning (ext4): destination with the same identifier (name{figure.2})
+ has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.131 
+       <../plots/boxplot_t.pdf>] [7pdfTeX warning (ext4): destination with the 
+same identifier (name{figure.3}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.131 
+       <../plots/boxplot_b.pdf>]
+
+LaTeX Warning: File `boxplot_iterations.pdf' not found on input line 133.
+
+
+! Package pdftex.def Error: File `boxplot_iterations.pdf' not found.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.133 ...width=\textwidth]{boxplot_iterations.pdf}
+                                                  
+Using draft setting for this image.
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `boxplot_cyclic.pdf' not found on input line 142.
+
+
+! Package pdftex.def Error: File `boxplot_cyclic.pdf' not found.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.142 ...ics[width=\textwidth]{boxplot_cyclic.pdf}
+                                                  
+Using draft setting for this image.
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+(verslag_heuristics.bbl [8pdfTeX warning (ext4): destination with the same iden
+tifier (name{figure.4}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
 l.8 \bibitem{LopDubStu2011irace}
-                                 <../plots/boxplot_general.pdf>] [6pdfTeX warni
-ng (ext4): destination with the same identifier (name{figure.2}) has been alrea
-dy used, duplicate ignored
+                                ] [9pdfTeX warning (ext4): destination with the
+ same identifier (name{figure.5}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
 l.8 \bibitem{LopDubStu2011irace}
-                                 <../plots/boxplot_t.pdf>])
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 131.
- [7]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 131.
-
-(verslag_heuristics.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 131.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 131.
+                                ])
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 158.
+ [10]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 158.
+ (verslag_heuristics.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 158.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 158.
 Package rerunfilecheck Info: File `verslag_heuristics.out' has not changed.
 (rerunfilecheck)             Checksum: 5B8E37D297C504CE835D93A33E29A224;510.
 
 
 LaTeX Warning: There were undefined references.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 131.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 158.
  ) 
 Here is how much of TeX's memory you used:
- 6481 strings out of 493673
- 91471 string characters out of 3141533
- 189208 words of memory out of 3000000
- 9710 multiletter control sequences out of 15000+200000
- 9369 words of font info for 34 fonts, out of 3000000 for 9000
+ 6504 strings out of 493673
+ 91777 string characters out of 3141533
+ 189485 words of memory out of 3000000
+ 9718 multiletter control sequences out of 15000+200000
+ 9537 words of font info for 35 fonts, out of 3000000 for 9000
  1025 hyphenation exceptions out of 8191
- 29i,6n,28p,1020b,707s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 29i,6n,28p,1238b,707s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx10.pfb>
 <C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C
 :/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/
@@ -614,10 +670,11 @@ s (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Program Files (x
 86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files (x86)/
 MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files (x86)/Mi
 KTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Program Files (x86)/MiKTe
-X 2.9/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on verslag_heuristics.pdf (7 pages, 184409 bytes).
+X 2.9/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Program Files (x86)/MiKTeX 
+2.9/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
+Output written on verslag_heuristics.pdf (10 pages, 207606 bytes).
 PDF statistics:
- 190 PDF objects out of 1000 (max. 8388607)
- 55 named destinations out of 1000 (max. 500000)
- 75 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 225 PDF objects out of 1000 (max. 8388607)
+ 66 named destinations out of 1000 (max. 500000)
+ 80 words of extra memory for PDF output out of 10000 (max. 10000000)
 

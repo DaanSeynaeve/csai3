@@ -18,6 +18,6 @@ while(i< length(args)) {
 }
 source("LAHC.R")
 source("GSP.R")
-maxit= 500
+maxit= 100
 p <- c(p1,p2,p3,p4,p5,p6,p7,p8)
 cat(gsp_lahc(instance,lfa,maxit,p,FALSE)$res)

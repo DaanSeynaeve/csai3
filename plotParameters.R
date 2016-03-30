@@ -13,9 +13,9 @@ readExperiments <- function(filename,label) {
 
 #boxplot(df)
 
-#require(reshape2)
-t10 = readExperiments("experimentt10.txt","t = 10")
-t100 = readExperiments("experimentt100.txt","t = 100")
+require(reshape2)
+t10 = readExperiments("experimentb5.txt","b = [5,10]")
+t100 = readExperiments("experimentb50.txt","b = [50,100]")
 
 df <- rbind(t10,t100)
 df.m <- melt(df, id.var = "label",variable.name = "neighbourhood", value.name = "weight")

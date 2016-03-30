@@ -7,7 +7,7 @@ parameterFile <- "./parameters.txt"
 
 #execDir <- "./test-arena"
 
-instanceDir <- "./instances_t100"
+instanceDir <- "./instances"
 #instanceFile <- "./instances.txt"
 
 #parallel <- 1
