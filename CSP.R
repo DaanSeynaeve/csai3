@@ -32,7 +32,7 @@ csp_init_solution <- function(instance, random) {
 #' shifts a random employee assignment left or right
 csp_shift <- function(sol, instance) {
     e <- sample(1:dim(sol)[1],1)
-    sol[e,] <- n_lshift(sol[e,],sample(c(-1,1),1))
+    sol[e,] <- rbind(n_lshift(sol[e,],sample(c(-1,1),1)))
     if (check_solution(sol,instance)) return(sol) else return(NULL)
 }
 
@@ -40,7 +40,7 @@ csp_shift <- function(sol, instance) {
 #' Maybe produce a new solution by deleting k assignments and adding l assignments
 csp_kl_replace <- function(sol, instance, k, l) {
     if (k < dim(sol)[1]) {
-        if (k > 0) sol <- sol[-sample(1:dim(sol)[1],k),]
+        if (k > 0) sol <- rbind(sol[-sample(1:dim(sol)[1],k),])
         if (l > 0) {
             offsets <- matrix(sample(1:dim(sol)[2],l))
             sol <- rbind(sol,t(apply(offsets,1,function(n) {n_lshift(instance$assignment,n)})))

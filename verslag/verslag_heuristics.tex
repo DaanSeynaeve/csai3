@@ -76,13 +76,30 @@ Our heuristic is a slightly modified version of the standard Late Acceptance Hil
 	\end{algorithmic}
 \end{algorithm}
 
+\subsection{Initial Solution}
+\subsubsection{General Scheduling problem}
+
+\subsubsection{Cyclic Scheduling problem}
+
 \subsection{Neighbourhoods}
 \label{subsec:neighbourhoods}
 \subsubsection{General scheduling problem}
 \paragraph{Replace}
+
+To create a new candidate solution from the replacement neighbourhood, a random employee assignment is removed from the current solution. Then, new assignments are added until the minimal demand is again satisfied.
+
 \paragraph{Shrink}
-\paragraph{Left shift}
-\paragraph{AND operator}
+
+Similarly to the replacement, an employee assignment from the current solution is randomly selected for removal. In contrast, the assigment is only removed if the resulting solution still satisfies the minimal demand.
+
+\paragraph{Shift}
+
+Candidates from the shift neighbourhood are created by randomly selecting an assigment and shifting the on/off-value of each day by one day to the right or left.
+
+\paragraph{Combination}
+
+A candidate in the combination neighbourhood is created by randomly selecting two assignments that act as parents. From these parents, a child assigment 
+
 \paragraph{XOR operator}
 \paragraph{Vertical swap}
 \paragraph{Bitflip}
