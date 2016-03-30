@@ -3,11 +3,11 @@
 ## to tune the ACOTSP software.
 ############################################################################
 
-parameterFile <- "./parameters.txt"
+parameterFile <- "./parameters_cyclic.txt"
 
 #execDir <- "./test-arena"
 
-instanceDir <- "./instances"
+instanceDir <- "./instances_cyclic"
 #instanceFile <- "./instances.txt"
 
 #parallel <- 1
