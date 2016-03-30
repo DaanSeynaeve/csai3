@@ -44,7 +44,8 @@ An example of a cyclic problem specification for the supermarket is the followin
 $assignment = [1,1,0,0,0,0,1,1,1,1,1,1,0,0$, $b = [2,2,2,2,3,3,2,2,2,3,3,3,4,3]$.
 
 \section{The heuristic}
-Our heuristic is a slightly modified version of the standard Late Acceptance Hill Climbing algorithm presented in \cite{burke2012late}. See Algorithm \ref{alg:lahc} for pseudocode of our heuristic. On line 6, we construct a new candidate solution. We do this by randomly selecting a neighbourhood and using this neighbourhood to mutate our current solution. Pseudocode for this procedure is given in Algorithm \ref{alg:mutation}. In subsection \ref{subsec:neighbourhoods}, we discuss the neighbourhoods of our heuristic.
+Our heuristic is a slightly modified version of the standard Late Acceptance Hill Climbing algorithm presented in \cite{burke2012late}. See Algorithm \ref{alg:lahc} for pseudocode of our heuristic. On line 6, we construct a new candidate solution. We do this by randomly selecting a neighbourhood and using this neighbourhood to mutate our current solution. Pseudocode for this procedure is given in Algorithm \ref{alg:mutation}. Note that our heuristic operates in the valid subspace of the search space: only valid candidate solutions are ever accepted. As a result, we are able to use a simple cost function: the total number of assignments.
+The generation of initial solutions is discussed in subsection \ref{subsec:initial} and the neighbourhoods of our heuristic are discussed in subsection \ref{subsec:neighbourhoods}.
 
 \begin{algorithm}                      % enter the algorithm environment
 	\caption{LAHC with imperfect mutation operator}% which may fail}          % give the algorithm a caption
@@ -61,15 +62,15 @@ Our heuristic is a slightly modified version of the standard Late Acceptance Hil
 		\WHILE{$i < n$}
 		\STATE Construct new candidate solution $s^*$
 		\IF{$s^*$ is a valid solution}
-			\STATE Calculate cost function $C(s^*)$
-			\STATE $v \leftarrow j$ \textbf{mod} $lfa$
-			\IF{$C(s^*) \leq f_v$ \OR $C(s^*) \leq C(s)$}
-				\STATE Accept new solution: $s \leftarrow s^*$
-			\ELSE
-				\STATE Reject new solution: $s \leftarrow s$
-			\ENDIF
-			\STATE Insert the current cost in the fitness array: $f_v \leftarrow C(s)$
-			\STATE Increment the fitness position: $j \leftarrow j+1$
+		\STATE Calculate cost function $C(s^*)$
+		\STATE $v \leftarrow j$ \textbf{mod} $lfa$
+		\IF{$C(s^*) \leq f_v$ \OR $C(s^*) \leq C(s)$}
+		\STATE Accept new solution: $s \leftarrow s^*$
+		\ELSE
+		\STATE Reject new solution: $s \leftarrow s$
+		\ENDIF
+		\STATE Insert the current cost in the fitness array: $f_v \leftarrow C(s)$
+		\STATE Increment the fitness position: $j \leftarrow j+1$
 		\ENDIF
 		\STATE Increment the iteration number: $i \leftarrow i+1$
 		\ENDWHILE
@@ -77,12 +78,26 @@ Our heuristic is a slightly modified version of the standard Late Acceptance Hil
 \end{algorithm}
 
 \subsection{Initial Solution}
-\subsubsection{General Scheduling problem}
 
-\subsubsection{Cyclic Scheduling problem}
+The heuristic starts from a solution that satisfies minimal demand and adheres to the constraints of the problem. These initial solutions are generated in the following way:
+
+\label{subsec:initial}
+
+\paragraph{General scheduling problem}
+
+For the general problem, new assignments that respect the constraints are repeatedly randomly generated until minimal demand is satisfied.
+
+\paragraph{Cyclic Scheduling problem}
+
+For the cyclic problem, we considered two alternatives: (1) repeatedly shifting (one day to the left) and adding the given assignment until minimal demand is satisfied, or (2) repeatedly generating randomly shifted assignments until minimal demand is satisfied. Pilot tests indicated the second option to be superior over the first so we have used it in all our experiments.
 
 \subsection{Neighbourhoods}
+
 \label{subsec:neighbourhoods}
+
+In general, candidate solutions generated from the neighbourhoods are not guaranteed to be valid (i.e. they may not satisfy the minimal demand and constraints of the problem). Invalid candidates are simply rejected and the algorithm proceeds with generating a new candidate.
+
+
 \subsubsection{General scheduling problem}
 \paragraph{Replace}
 
@@ -90,22 +105,30 @@ To create a new candidate solution from the replacement neighbourhood, a random 
 
 \paragraph{Shrink}
 
-Similarly to the replacement, an employee assignment from the current solution is randomly selected for removal. In contrast, the assigment is only removed if the resulting solution still satisfies the minimal demand.
+Similarly to the replacement, an employee assignment from the current solution is randomly selected for removal. In contrast, no new assignments are added.
 
 \paragraph{Shift}
 
-Candidates from the shift neighbourhood are created by randomly selecting an assigment and shifting the on/off-value of each day by one day to the right or left.
+Candidates from the shift neighbourhood are created by randomly selecting an assigment and shifting the on/off-value of each day by one day to the right or left. At the edges, a new on/off-value is randomly chosen.
 
 \paragraph{Combination}
 
-A candidate in the combination neighbourhood is created by randomly selecting two assignments that act as parents. From these parents, a child assigment 
+A candidate in the combination neighbourhood is created by randomly selecting two assignments that act as parents. From these parents, a child assigment is created by performing some pairwise logical operation. We have considered the using the \textbf{and}, \textbf{or} and \textbf{xor} operations. For example, a new assignment created with \textbf{and} consists of on-values on days where both parent assignments have an on-value and an off-values otherwise. The parent assignments are removed from the current solution and the child assignment is added.
 
-\paragraph{XOR operator}
-\paragraph{Vertical swap}
+\paragraph{Vertical Swap}
+
+To generate a new candidate from this neighbourhood, two assignments are randomly selected from the current solution. For a (randomly chosen) single day, the on/off-value is swapped between the two assignments.
+
 \paragraph{Bitflip}
+The bitflip neighbourhood yields candidates that correspond to the most atomic change in schedule for the general problem: flipping the on/off-value of a single day in a single assignment.
+
 \subsubsection{Cyclic scheduling problem}
-\paragraph{k-l Replace}
-\paragraph{k-shift}
+\paragraph{$K,L$-Replace}
+The $K,L$-replacement neighbourhood depends on two parameters: $K$ and $L$. Candidates from this neighbourhood are generated by randomly removing $K$ assignments from the current solution and adding $L$ newly generated ones.
+
+\paragraph{Shift}
+This neighbourhood is similar to the shift neighbourhood used for the general problem. However, instead of randomly choosing an on/off-value at the edge the shift is cyclic.
+As a result, this operator yields candidates that correspond to the most atomic change in schedule for the cyclic problem.
 
 \section{Paremeter tuning \& Results}
 Our heuristic for the general problem has 9 parameters in total. The first one is the length of the fitness array. The other 8 are the relative weights for each neighbourhood that determine how frequently they get chosen to construct a new candidate solution. Using the irace package, we tuned these parameters to get some insight in our heuristic.
@@ -152,13 +175,13 @@ Finally, we tested if there was any difference between the optimal parameters if
 \end{figure}
 
 \paragraph{Cyclic problems}
-Our heuristic for the cyclic scheduling problem has 5 parameters in total: the length of the fitness array, the relative weights for its two neighbourhoods, and the $k$ and $l$ parameters for the '$k$-$l$ replace' neighbourhood. We tested if one neighbourhood would be dominant over the other and if irace could learn that the $l$ parameter should be lower than $k$ for the '$k$-$l$ replace' neighbourhood to be successful. The elite candidates found by irace are presented in Table \ref{tbl:cyclic}.
+Our heuristic for the cyclic scheduling problem has 5 parameters in total: the length of the fitness array, the relative weights for its two neighbourhoods, and the $K$ and $K$ parameters for the '$K,L$-replace' neighbourhood. We tested if one neighbourhood would be dominant over the other and if irace could learn that the $L$ parameter should be lower than $K$ for the '$K,L$-replace' neighbourhood to be successful. The elite candidates found by irace are presented in Table \ref{tbl:cyclic}.
 
 \begin{table}[]
 	\centering
 	\begin{tabular}{lccccc}
 		\hline
-		id &lfa&   shift & k-l replace& k& l \\ \hline
+		id &lfa&   shift & $K,L$-replace& K& K \\ \hline
 		564 & 14 &0.20& 0.80& 2 &1           \\
 		388  & 3 &0.49 &0.51 &2 &1           \\
 		624  &16 &0.40 &0.60 &2 &1           \\
@@ -167,7 +190,7 @@ Our heuristic for the cyclic scheduling problem has 5 parameters in total: the l
 	\caption{The elite candidates for the cyclic problems}
 	\label{tbl:cyclic}
 \end{table}
-We can see that the length of the fitness array does not have a significant influence on the performance of our heuristic. Neither shift nor 'k-l replace' are extremely dominant, they are both important neighbourhoods. Irace seems to have learned the optimal settings for both $k$ and $l$ with a lot of confidence, as they are the same for all elite candidates.
+We can see that the length of the fitness array does not have a significant influence on the performance of our heuristic. Neither 'shift' or '$K,L$-replace' are extremely dominant, they are both important neighbourhoods. Irace seems to have learned the optimal settings for both $K$ and $L$ with a lot of confidence, as they are the same for all elite candidates.
 
 
 % cyclic: 2 neighbourhoods
@@ -176,7 +199,7 @@ We can see that the length of the fitness array does not have a significant infl
 % We verwachten een lage optimale waarde voor k
 
 \section{Conclusions}
-We have shown how we generated combinatorial problems for both the general and cyclic scheduling problems based on real world data. We have explained how our heuristic works, focusing on our slight modification of the Late Acceptance Hill Climbing heuristic and our large variety of neighbourhoods. From tuning the parameters, we found out that the LAHC heuristic is useless and that some neighbourhoods are significantly more useful than others when dealing with smaller problems. For larger and more complex problems however, the recommended length of the fitness array grew and the variance of the relative weights of all neighbourhoods decreased, meaning that each neighbourhood contributed to the heuristic in some way. For cyclic problems, irace was able to easily learn the expected optimal setting for the '$k$-$l$ replace' heuristic.
+We have shown how we generated combinatorial problems for both the general and cyclic scheduling problems based on real world data. We have explained how our heuristic works, focusing on our slight modification of the Late Acceptance Hill Climbing heuristic and our large variety of neighbourhoods. From tuning the parameters, we found out that the LAHC heuristic is useless and that some neighbourhoods are significantly more useful than others when dealing with smaller problems. For larger and more complex problems however, the recommended length of the fitness array grew and the variance of the relative weights of all neighbourhoods decreased, meaning that each neighbourhood contributed to the heuristic in some way. For cyclic problems, irace was able to easily learn the expected optimal setting for the $K,L$-replace heuristic.
 
 \bibliography{references}
 \bibliographystyle{plain}
